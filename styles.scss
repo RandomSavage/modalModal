@@ -32,3 +32,18 @@
 h3{
   font-family: 'Dancing Script', cursive;
 }
+
+.email-modal{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all .4s ease-in-out;
+  visibility: hidden;
+  opacity: 0;
+}
