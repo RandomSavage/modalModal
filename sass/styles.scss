@@ -2,6 +2,9 @@
 
 @import 'reset.scss';
 
+/* css.gg */
+@import url('https://css.gg/css');
+
 *{
   font-family: 'Noto Sans JP', sans-serif;
 }
@@ -46,4 +49,41 @@ h3{
   transition: all .4s ease-in-out;
   visibility: hidden;
   opacity: 0;
+}
+.email-modal--visible{
+  visibility: visible;
+  opacity: 1;
+}
+.email-modal__close-btn{
+  position: fixed;
+  top: 0;
+  right: 0;
+  padding: 20px;
+  cursor: pointer;
+  background: red;
+}
+.email-modal .gg-close{
+  color: #fff;
+}
+.gg-close{
+  --ggs:2;
+}
+.email-modal__container{
+  background: rgba(29,103,200,1);
+  max-width: 700px;
+  width: 100%;
+  color: #fff;
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  overflow: hidden;
+
+}
+.email-modal__info{
+  width: 50%;
+  padding: 15px;
+}
+.email-modal__side-img{
+  width: 50%;
+
 }
