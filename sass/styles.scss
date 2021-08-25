@@ -103,11 +103,23 @@ h3{
     line-height: 1.7;
     margin-bottom: 1.2rem;
   }
+  .email-modal__error-message{
+    color: #fbe743;
+    margin-bottom: .7rem;
+    font-size: .8rem;
+    display: none;
+    &--active{
+      display: block;
+    }
+  }
   .email-modal__form-group{
     background: #fff;
     display: flex;
     padding: 5px;
     margin-bottom: 1.2rem;
+    &--error{
+      border: 1px solid red;
+    }
     .email-modal__input{
       border: 0px solid;
       background: #fff;
