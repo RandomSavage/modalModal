@@ -16,19 +16,47 @@ window.onload = function() {
 
    let emailButton = document.getElementsByClassName('email-modal__button')[0]
 
+   let thankContainer = document.getElementsByClassName('email-thank')[0]
+
+   let declineOffer = document.getElementsByClassName('email-modal__decline-offer')[0]
+
    function emailIsValid(email) {
       return /\S+@\S+\.\S+/.test(email)
    }
 
-   emailButton.addEventListener('click', () => {
-      if(emailIsValid(emailInput.value)) {
-      console.log(emailInput.value)
+   emailInput.addEventListener('click', () => {
+      removeErrors()
+      emailInput.value = ""
+   })
+
+   declineOffer.addEventListener('click', () => {
+      closeModal()
+   })
+
+   let removeErrors = () => {
       emailError.classList.remove('email-modal__error-message--active')
       emailForm.classList.remove('email-modal__form-group--error')
+   }
+
+   let addErrors = () => {
+      emailError.classList.toggle('email-modal__error-message--active')
+      emailForm.classList.toggle('email-modal__form-group--error')
+   }
+
+   let showThankMessage = () => {
+      thankContainer.classList.add('email-thank--success')
+      setTimeout(() => {
+         closeModal()
+      }, 3000)
+   }
+
+   emailButton.addEventListener('click', () => {
+      if(emailIsValid(emailInput.value)) {
+         showThankMessage()
+         console.log(emailInput.value)
       }
       else{
-         emailError.classList.toggle('email-modal__error-message--active')
-         emailForm.classList.toggle('email-modal__form-group--error')
+         addErrors()
          // emailError.innerText = "Nope, this is not a valid email"
          // alert('email not valid')
       }
@@ -43,11 +71,15 @@ window.onload = function() {
       }
    }
 
-   let closeModal = document.getElementsByClassName('email-modal__close-btn')[0]
-
-   closeModal.addEventListener('click', () => {
+   let closeModal = () => {
       emailModal.classList.remove('email-modal--visible')
       clearInterval(lizardEfx)
+   }
+
+   let closeButton = document.getElementsByClassName('email-modal__close-btn')[0]
+
+   closeButton.addEventListener('click', () => {
+      closeModal()
    })
    
       document.body.addEventListener('mouseleave', () => {

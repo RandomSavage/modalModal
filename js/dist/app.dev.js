@@ -12,19 +12,44 @@ window.onload = function () {
   var emailError = document.getElementsByClassName('email-modal__error-message')[0];
   var emailInput = document.getElementsByClassName('email-modal__input')[0];
   var emailButton = document.getElementsByClassName('email-modal__button')[0];
+  var thankContainer = document.getElementsByClassName('email-thank')[0];
+  var declineOffer = document.getElementsByClassName('email-modal__decline-offer')[0];
 
   function emailIsValid(email) {
     return /\S+@\S+\.\S+/.test(email);
   }
 
+  emailInput.addEventListener('click', function () {
+    removeErrors();
+    emailInput.value = "";
+  });
+  declineOffer.addEventListener('click', function () {
+    closeModal();
+  });
+
+  var removeErrors = function removeErrors() {
+    emailError.classList.remove('email-modal__error-message--active');
+    emailForm.classList.remove('email-modal__form-group--error');
+  };
+
+  var addErrors = function addErrors() {
+    emailError.classList.toggle('email-modal__error-message--active');
+    emailForm.classList.toggle('email-modal__form-group--error');
+  };
+
+  var showThankMessage = function showThankMessage() {
+    thankContainer.classList.add('email-thank--success');
+    setTimeout(function () {
+      closeModal();
+    }, 3000);
+  };
+
   emailButton.addEventListener('click', function () {
     if (emailIsValid(emailInput.value)) {
+      showThankMessage();
       console.log(emailInput.value);
-      emailError.classList.remove('email-modal__error-message--active');
-      emailForm.classList.remove('email-modal__form-group--error');
     } else {
-      emailError.classList.toggle('email-modal__error-message--active');
-      emailForm.classList.toggle('email-modal__form-group--error'); // emailError.innerText = "Nope, this is not a valid email"
+      addErrors(); // emailError.innerText = "Nope, this is not a valid email"
       // alert('email not valid')
     } // console.log(emailInput.value)
 
@@ -38,10 +63,14 @@ window.onload = function () {
     }
   };
 
-  var closeModal = document.getElementsByClassName('email-modal__close-btn')[0];
-  closeModal.addEventListener('click', function () {
+  var closeModal = function closeModal() {
     emailModal.classList.remove('email-modal--visible');
     clearInterval(lizardEfx);
+  };
+
+  var closeButton = document.getElementsByClassName('email-modal__close-btn')[0];
+  closeButton.addEventListener('click', function () {
+    closeModal();
   });
   document.body.addEventListener('mouseleave', function () {
     showModal();
